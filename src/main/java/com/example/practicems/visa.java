@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class visa {
     @GetMapping("/visa")
-    public String getData () {return "book visa for dubai" ;}
+    public String getData () {return "book visa for gulf dubai" ;}
 }
