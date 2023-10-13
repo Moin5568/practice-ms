@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class bus {
     @GetMapping("/bus")
-    public String getData () {return "hello I am Moin book a bus for travelling " ;}
+    public String getData () {return "Book a bus from mumbai to pune " ;}
 }
