@@ -1,34 +1,32 @@
 pipeline {
-
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
-    }
-
-    agent any
-
-    tools {
-        maven 'maven_3.9.5'
-    }
+    agent any // Use any available agent (node) for this pipeline
 
     stages {
-        stage('Code Compilation') {
+        stage('Checkout') {
             steps {
-                echo 'Code Compilation is started'
-                sh 'mvn clean compile'
-				echo 'Code Compilation is Completed Successfully!'
+                // Checkout your source code from a version control system (e.g., Git)
+                checkout scm
             }
         }
-        stage('Code QA Execution') {
+
+        stage('Build') {
             steps {
-                echo 'Junit Test case check in Progress!'
-                sh 'mvn clean test'
+                // Build your application (e.g., compile code)
+                sh 'mvn clean package' // Example for a Maven project
             }
         }
-        stage('Code Package') {
+
+        stage('Test') {
             steps {
-                echo 'Creating War Artifact'
-                sh 'mvn clean package'
-                echo 'MVN package is completed'
+                // Run your tests
+                sh 'mvn test' // Example for running tests with Maven
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy your application to a server or container
+                sh 'docker-compose up -d' // Example for deploying with Docker
             }
         }
     }
