@@ -4,7 +4,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
     }
 
-    agent {'label JenkinsSlave'}
+    agent {'label JenkinsSlave-java'}
 
     tools {
         maven 'maven_3.9.5'
