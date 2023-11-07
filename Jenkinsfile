@@ -1,20 +1,31 @@
 pipeline {
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+    }
+
     agent any
+
+    tools {
+        maven 'maven_3.9.5'
+    }
+
     stages {
-        stage("Build") {
+        stage('Code Compilation') {
             steps {
-                echo "Building the app"
+                echo 'code compilation is starting'
+                sh 'mvn clean compile'
+				echo 'code compilation is completed'
             }
         }
-        stage("Test") {
+
+        stage('Code Package') {
             steps {
-                echo "Testing the app"
+                echo 'code packing is starting'
+                sh 'mvn clean package'
+				echo 'code packing is completed'
             }
         }
-        stage("Deploy") {
-            steps {
-                echo "Deploying the app"
-            }
-        }
+
     }
 }
